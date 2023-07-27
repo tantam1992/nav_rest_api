@@ -25,9 +25,8 @@ wait(1000);
 // Local ROS Connection
 let ros = new roslib.Ros({ url : `ws://${ip_address}:${port}` });
 
-// Robot Pose Topic and Variable
-// var AmclPose;
-var RobotPose;
+// AMCL Topic and Variable
+var AmclPose;
 
 let location = {
     x: 0,
@@ -36,39 +35,20 @@ let location = {
 };
 
 ros.on('connection', function() {
-    // AmclPose = new roslib.Topic({
-    //     ros : ros,
-    //     name : 'amcl_pose',
-    //     messageType : 'geometry_msgs/PoseWithCovarianceStamped'
-    // });
-    
-    // AmclPose.subscribe(message => {
-    //     location.x = message.pose.pose.position.x;
-    //     location.y = message.pose.pose.position.y;
-
-    //     let qx = message.pose.pose.orientation.x;
-    //     let qy = message.pose.pose.orientation.y;
-    //     let qz = message.pose.pose.orientation.z;
-    //     let qw = message.pose.pose.orientation.w;
-
-    //     let euler = qte([qw, qx, qy, qz]);
-    //     location.th = euler[2];
-    // });
-
-    RobotPose = new roslib.Topic({
+    AmclPose = new roslib.Topic({
         ros : ros,
-        name : 'robot_pose',
-        messageType : 'geometry_msgs/Pose'
+        name : 'amcl_pose',
+        messageType : 'geometry_msgs/PoseWithCovarianceStamped'
     });
     
-    RobotPose.subscribe(message => {
-        location.x = message.position.x;
-        location.y = message.position.y;
+    AmclPose.subscribe(message => {
+        location.x = message.pose.pose.position.x;
+        location.y = message.pose.pose.position.y;
 
-        let qx = message.orientation.x;
-        let qy = message.orientation.y;
-        let qz = message.orientation.z;
-        let qw = message.orientation.w;
+        let qx = message.pose.pose.orientation.x;
+        let qy = message.pose.pose.orientation.y;
+        let qz = message.pose.pose.orientation.z;
+        let qw = message.pose.pose.orientation.w;
 
         let euler = qte([qw, qx, qy, qz]);
         location.th = euler[2];
