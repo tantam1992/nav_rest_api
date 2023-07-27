@@ -2,9 +2,9 @@
     "url" : "/map.png",
     "resolution" : 0.05,
     "origin" : {
-        "x" : -1.242387,
-        "y" : 2.412199
+        "x" : -16.9845,
+        "y" : -24.2772
     },
-    "width" : 125,
-    "height" : 116
+    "width" : 1085,
+    "height" : 665
 }

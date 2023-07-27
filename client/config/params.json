@@ -1,6 +1,6 @@
 {
     "rate" : 1,
-    "robot_name" : "robot0",
+    "robot_name" : "tko_robot_01",
     "port" : 9090,
     "ip_address" : "localhost",
     "host_ip_address" : "localhost"
